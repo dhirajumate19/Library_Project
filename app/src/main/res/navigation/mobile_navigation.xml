@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.mylibrary.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_UserProfile"
+        android:name="com.example.mylibrary.ui.UserProfile.UserProfileFragment"
+        android:label="@string/title_user_profile"
+        tools:layout="@layout/fragment_user_profile" />
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="com.example.mylibrary.ui.notifications.NotificationsFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/navigation_Userlogout"
+        android:name="com.example.mylibrary.ui.LogoutUser.LogoutuserFragment"
+        android:label="@string/title_LogoutUser"
+        tools:layout="@layout/fragmant_logoutuser" />
+</navigation>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/removebg">
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/Removebookid"
+        android:layout_width="386dp"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="301dp"
+        android:layout_marginEnd="14dp"
+        android:hint="Book ID"
+        android:textAlignment="center"
+        android:background="@drawable/edittextbg"
+        android:textColorHint="@color/md_orange_500">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="61dp"
+            android:inputType="number">
+
+        </com.google.android.material.textfield.TextInputEditText>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/Removebtn"
+        android:layout_width="wrap_content"
+        android:layout_height="63dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="182dp"
+        android:layout_marginEnd="128dp"
+        android:layout_marginStart="128dp"
+        android:layout_marginTop="414dp"
+        android:background="@drawable/removebookbuttonbg" />
+</RelativeLayout>

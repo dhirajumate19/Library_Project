@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/layout"
+    android:background="@drawable/booksfiled">
+
+    <include
+        android:id="@+id/toolbarstud"
+        layout="@layout/toolbar">
+
+    </include>
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbarstud"
+        android:gravity="center"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/seemybook"
+            style="@style/TextAppearance.AppCompat.Widget.Button.Borderless.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="See My Books"
+            android:textSize="30sp"
+            android:textStyle="italic"
+            app:rippleColor="@color/md_light_blue_400"
+            app:shapeAppearance="?android:fullDark" />
+        <Button
+            android:id="@+id/searchbook"
+            style="@style/TextAppearance.AppCompat.Widget.Button.Borderless.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search My Books"
+            android:textSize="30sp"
+            android:layout_marginTop="110dp"
+            android:textStyle="italic"
+            app:rippleColor="@color/md_light_blue_400"
+            app:shapeAppearance="?android:fullDark" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_marginTop="150dp">
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Re-Issued Books"
+            android:textStyle="italic"
+            android:textSize="30sp"
+            app:rippleColor="@color/md_light_blue_400"
+            app:shapeAppearance="?android:fullDark"
+            style="@style/TextAppearance.AppCompat.Widget.Button.Borderless.Colored"/>
+
+    </LinearLayout>
+
+<!--  <androidx.appcompat.widget.SearchView-->
+<!--       android:id="@+id/serachview"-->
+<!--      android:layout_width="197dp"-->
+<!--     android:layout_height="wrap_content"-->
+<!--       android:layout_marginLeft="140dp"-->
+<!--      android:layout_marginTop="5dp"-->
+<!--    app:showAsAction="collapseActionView"/>-->
+
+
+<!--    <TextView-->
+<!--        android:id="@+id/ifNoBook"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="0.2in"-->
+<!--        android:text="No Such Book !"-->
+<!--        android:textColor="#F10A0A"-->
+<!--        android:textSize="18dp"-->
+<!--        android:visibility="visible" />-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

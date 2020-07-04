@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="section_label" type="id" />
+    <item name="toolbar" type="id" />
+    <item name="text_home" type="id" />
+    <item name="nav_host_fragment" type="id" />
+    <item name="cardno" type="id" />
+    <item name="password" type="id" />
+    <item name="email" type="id" />
+    <item name="name" type="id" />
+    <item name="button" type="id" />
+    <item name="txtlog" type="id" />
+    <item name="check1" type="id" />
+    <item name="logout" type="id" />
+    <item name="progress_bar" type="id" />
+    <item name="serachview" type="id" />
+    <item name="layout" type="id" />
+</resources>

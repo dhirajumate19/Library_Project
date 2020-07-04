@@ -1,0 +1,101 @@
+<resources>
+    <string name="app_name">My Library</string>
+    <string name="remenber_me">Remenber_me</string>
+    <string name="login">login</string>
+    <string name="forgotpassword">forgotpassword</string>
+    <string name="welcome">WelCome</string>
+    <string name="FullName">FullName</string>
+    <string name="E_mail">E_mail</string>
+    <string name="Phone_no">Phone_number</string>
+    <string name="Password">Password</string>
+    <string name="Registration">Registration</string>
+    <string name="Create_Account">Create_Account!</string>
+    <string name="title_activity_home">Home</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="registrationtxt">Registration </string>
+    <string name="usernamelogin">Username</string>
+    <string name="passwordlogin">Password</string>
+    <string name="remember_me">Remember_me</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_Fav">favorite</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+
+    <string name="home_second">Home Second</string>
+    <string name="issued_date">Issued Date</string>
+    <string name="due_date">Due Date</string>
+    <string name="done">Done</string>
+    <string name="return_date">Return Date</string>
+    <string name="book_name">Book Name</string>
+    <string name="logout_user">Logout User</string>
+    <string name="todo">TODO</string>
+
+    <string name="title_home">Home</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_LogoutUser">Logout User</string>
+    <string name="userfetcherror">\"Error while the data \"</string>
+    <string name="title_user_profile">User Profile</string>
+    <string name="upload_changed_image">Upload/Changed Image</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="email">Email</string>
+    <string name="enrollno">Enroll Number</string>
+    <string name="cardno">Library card Number</string>
+    <string name="fullname">FullName</string>
+    <string name="user_profile">User Profile</string>
+    <string name="registration">Registrationadmin</string>
+    <string name="title_activity_admin_dashboard">AdminDashboard</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="i_agree_that_the_information_provided_is_correct">I Agree that the information provided is correct</string>
+    <string name="title_activity_admin_home">AdminHome</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="third_fragment_label" />
+    <string name="title_activity_add_home">Home</string>
+    <string name="Admin_Home">ADMIN HOME</string>
+
+    <!--  Home menu item  -->
+
+    <string name="Logout">Logout</string>
+    <string name="changetheme">Change Theme</string>
+    <string name="aboutus">About Us</string>
+    <string name="refresh">Refresh</string>
+    <string name="page_title">title</string>
+    <string name="content_description_search">decription</string>
+    <string name="search">searchtitle</string>
+    <string name="favorite">fav</string>
+    <string name="more">more</string>
+
+</resources>

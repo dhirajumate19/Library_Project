@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.LogoutUser.LogoutuserFragment">
+    <include
+        android:id="@+id/toolbarstud"
+        layout="@layout/toolbar">
+
+    </include>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageButton
+        android:id="@+id/Logoutuserbtn"
+        android:layout_width="match_parent"
+        android:layout_height="77dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="264dp"
+        android:layout_weight="1"
+        android:backgroundTint="#FF0000"
+        android:contentDescription="@string/todo"
+        android:src="@drawable/logout" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="233dp"
+        android:layout_height="44dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="422dp"
+        android:layout_marginEnd="74dp"
+        android:text="@string/logout_user"
+        android:textColor="#0B0A0A"
+        android:textSize="35sp"
+        android:textStyle="bold" />
+</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
