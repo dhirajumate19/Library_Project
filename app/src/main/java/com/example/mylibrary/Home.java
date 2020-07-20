@@ -9,6 +9,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -18,13 +19,22 @@ import androidx.navigation.ui.NavigationUI;
 public class Home extends AppCompatActivity {
   //  private ActionBar toolbar;
  private Toolbar toolbar;
+ private  ConstraintLayout constraintLayout;
+    private Object ActionBarContextView;
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    finish();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
       toolbar=(Toolbar) findViewById(R.id.toolbarstud) ;
       setSupportActionBar(toolbar);
-
+        constraintLayout  =findViewById(R.id.container);
 //        toolbar = getSupportActionBar();
         Log.i("task","work jgsaygfc egfufc");
         toolbar.setTitle("shop");
@@ -41,6 +51,10 @@ public class Home extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
       NavigationUI. setupWithNavController(navView, navController);
     }
+
+
+
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 

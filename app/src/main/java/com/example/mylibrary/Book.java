@@ -11,8 +11,9 @@ public class Book
     private String title, type;
     private int total = 0, available = 0, id;
     private List<Integer> unit = new ArrayList<Integer>();
-
-
+    private List<Integer> fine = new ArrayList<Integer>();
+    private int left_fine;
+    private String name, email;
     public Book() {
     }
 
@@ -22,6 +23,10 @@ public class Book
         this.total = total;
         this.id = id;
         this.available=total;
+
+
+
+
     }
 
     public Book(View view) {
@@ -75,5 +80,86 @@ public class Book
     public void setUnit(List<Integer> unit) {
         this.unit = unit;
     }
+
+    public int getLeft_fine() {
+        return left_fine;
+    }
+
+    public void setLeft_fine(int left_fine) {
+        this.left_fine = left_fine;
+    }
+    public void setFine(List<Integer> fine) {
+        this.fine = fine;
+    }
+    public List<Integer> getFine() {
+        return fine;
+    }
+
+
+
+    public Book(String name, String email, int enroll, int card, int type) {
+        this.name = name;
+        this.email = email;
+//      this.enroll = enroll;
+//        this.card = card;
+//        this.type = type;
+       }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+//    public List<Integer> getBook() {
+//        return book;
+//    }
+//
+//    public void setBook(List<Integer> book) {
+//        this.book = book;
+//    }
+
+
+//    public List<Integer> getRe() {
+//        return re;
+//    }
+//
+//    public void setRe(List<Integer> re) {
+//        this.re = re;
+//    }
+//
+//    public List<Timestamp> getDate() {
+//        return date;
+//    }
+
+//    public void setDate(List<Timestamp> date) {
+//        this.date = date;
+//    }
+//
+//    public int getEnroll() {
+//        return enroll;
+//    }
+//
+//    public void setEnroll(int enroll) {
+//        this.enroll = enroll;
+//    }
+//
+//    public int getCard() {
+//        return card;
+//    }
+//
+//    public void setCard(int card) {
+//        this.card = card;
+//}
 }
 

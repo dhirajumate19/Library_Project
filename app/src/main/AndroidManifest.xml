@@ -4,7 +4,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/bookicon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -32,6 +32,8 @@
         <activity android:name=".ui.home.HomeFragment" />
         <activity android:name=".SearchBook" />
         <activity android:name=".UpdateBook" />
+        <activity android:name=".AdminCollectFine" />
+        <activity android:name=".ProcessVerifiacion" />
     </application>
 
     <permission android:name="android.permission.INTERNET" />

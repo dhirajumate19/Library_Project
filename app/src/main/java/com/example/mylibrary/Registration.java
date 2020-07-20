@@ -25,7 +25,7 @@ import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -54,11 +54,13 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
     FirebaseAuth mAuth;
     FirebaseFirestore db;
     String UserId;
-
+    private PhoneAuthProvider.ForceResendingToken resendingToken;
+    private PhoneAuthProvider.OnVerificationStateChangedCallbacks phoneAuthProvider;
+    private String verificationId;
     private String type;
     private int type1;
     private int temp;
-
+    private boolean mVerificationInProgress = false;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -66,32 +68,6 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         Initialize();
 
-//
-        if (mAuth.getCurrentUser()!=null) {
-
-            String currentuser = mAuth.getCurrentUser().getUid();
-            Log.i("task","currentuseremailget"+currentuser);
-           db.collection("Users").document(mAuth.getCurrentUser().getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-               @Override
-               public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                   DocumentSnapshot document = task.getResult();
-                    long group = (long) document.get("type1");
-                   Log.d("sample2", "" + group);
-                   if (group == 1){
-                  Intent intent = new Intent(Registration.this, AdminHome.class);
-                  startActivity(intent);
-                  finish();
-              }
-             else {
-                 Log.i("task","working fine");
-                  Intent intent = new Intent(Registration.this, Home.class);
-                  startActivity(intent);
-                  finish();
-              }
-               }
-
-           });
-        }
         ///   User type selection
         List<String> list = new ArrayList<>();
         list.add("Select Account Type");
@@ -161,8 +137,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
 
             }
         });
-
-        btnRegister.setOnClickListener((View.OnClickListener) this);
+        btnRegister.setOnClickListener(this);
         // check1.setOnClickListener((View.OnClickListener) this);
 
         txtlink.setOnClickListener(new View.OnClickListener() {
@@ -174,20 +149,20 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
             }
         });
     }
-
     @Override
     public void onClick(View view) {
 
         if (view == btnRegister) {
-
-          //  check1.setChecked(true);
-        //    btnRegister.setEnabled(true);
+            String phonenumber = Phone.getEditText().getText().toString().trim();
+//            sendVerificationCod(phonenumber);
+//            phoneauth();
+            //  check1.setChecked(true);
+            //    btnRegister.setEnabled(true);
             register();
-        }
-        }
 
-
-// register method user and admin
+        }
+    }
+ // register method user and admin
     private void register() {
         if (verifyType()) return;
 
@@ -204,8 +179,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         String pasword = Password.getEditText().getText().toString().trim();
         if (type.equals("User")) {
             type1 = 0;
-        }
-        else {
+        } else {
             type1 = 1;
         }
 
@@ -263,7 +237,18 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                             public void onSuccess(Void aVoid) {
                                 Log.i("message", "DocumentSnapshot added with ID: " + mAuth.getCurrentUser().getUid());
                                 Toast.makeText(Registration.this, "Account Created...", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(Registration.this, Home.class);
+                                String phonenumber = Phone.getEditText().getText().toString().trim();
+                               String locale = getApplication().getApplicationContext().getResources().getConfiguration().locale.getCountry();
+                               Log.i("task","code"+locale);
+                                if (phonenumber.isEmpty() || phonenumber.length() < 10) {
+                                    Phone.setError("Valid number is required");
+                                    Phone.requestFocus();
+                                    return;
+                                }
+                                String mobile=phonenumber+locale;
+                                Log.i("task","with code"+mobile);
+                                Intent intent = new Intent(Registration.this, ProcessVerifiacion.class);
+                                intent.putExtra("mobile",mobile);
                                 startActivity(intent);
                             }
                         }).addOnFailureListener(new OnFailureListener() {
@@ -287,66 +272,39 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                         Admin.put("phoneno", pnumber);
                         Admin.put("type1", type1);
 
-                        db.collection("Users").document(mAuth.getCurrentUser().getUid()).set(Admin).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        db.collection("admin").document(mAuth.getCurrentUser().getUid()).set(Admin).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 progressDialog.cancel();
-                                Toast.makeText(Registration.this, "Registered Successfully !", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Registration.this, "Registered Successfully.... !", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(getApplicationContext(), AdminHome.class));
                                 finish();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                final FirebaseUser firebaseUser=FirebaseAuth.getInstance().getCurrentUser();
-                                            AuthCredential authCredential = EmailAuthProvider.getCredential("Email", "Password");
-                                            Log.d("task", "working"+ authCredential);
-                                          firebaseUser.reauthenticate(authCredential).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                                AuthCredential authCredential = EmailAuthProvider.getCredential("Email", "Password");
+                                Log.d("task", "working" + authCredential);
+                                firebaseUser.reauthenticate(authCredential).addOnCompleteListener(new OnCompleteListener<Void>() {
 
-                                              @Override
-                                              public void onComplete(@NonNull Task<Void> task) {
-                                                  //Use Delete method to delete user
-                                             firebaseUser.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                 @Override
-                                                 public void onComplete(@NonNull Task<Void> task) {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        //Use Delete method to delete user
+                                        firebaseUser.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
-                                                    Log.w(TAG, "Error While adding document"+task);
+                                                    Log.w(TAG, "Error While adding document" + task);
                                                 }
-                                                 }
-                                             });
-                                              }
-                                          });
+                                            }
+                                        });
+                                    }
+                                });
                                 Toast.makeText(Registration.this, "Please Try Again !" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
-//                         addOnFailureListener(new OnFailureListener() {
-//                                        @Override
-//                                        public void onFailure(@NonNull final Exception e) {
-//                                         //  Failure while user Creation some error
-//                                         final FirebaseUser firebaseUser=FirebaseAuth.getInstance().getCurrentUser();
-//                                            AuthCredential authCredential = EmailAuthProvider.getCredential("Email", "Password");
-//                                            Log.d("task", "working"+ authCredential);
-//                                          firebaseUser.reauthenticate(authCredential).addOnCompleteListener(new OnCompleteListener<Void>() {
-//
-//                                              @Override
-//                                              public void onComplete(@NonNull Task<Void> task) {
-//                                                  //Use Delete method to delete user
-//                                             firebaseUser.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                                 @Override
-//                                                 public void onComplete(@NonNull Task<Void> task) {
-//                                                if (task.isSuccessful()) {
-//                                                    Log.w(TAG, "Error While adding document", e);
-//                                                }
-//                                                 }
-//                                             });
-//                                              }
-//                                          });
-//
-//                                        }
-//                                    });
-
-
                 } else {
                     progressDialog.cancel();
                     if (task.getException() instanceof FirebaseAuthUserCollisionException) {
@@ -414,11 +372,12 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
 
     // method for verify phone number
     private boolean verifyphonenumber() {
+
         String phonenumber = Phone.getEditText().getText().toString().trim();
-        if (phonenumber.isEmpty()|phonenumber.length()!=10) {
+        if (phonenumber.isEmpty() | phonenumber.length() != 13) {
 
             Phone.setErrorEnabled(true);
-            Phone.setError("Phone No. Required" +"Phone Number not Valid");
+            Phone.setError("Phone No. Valid Required"  );
             return true;
         } else {
             Phone.setErrorEnabled(false);
@@ -426,29 +385,85 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+//    private void sendVerificationCod(String phonenumber) {
+//        PhoneAuthProvider.getInstance()
+//                        .verifyPhoneNumber("+91" + phonenumber,
+//                        60, TimeUnit.SECONDS,
+//                        TaskExecutors.MAIN_THREAD,
+//                        phoneAuthProvider);
+//                 }
+//
+//    private void phoneauth() {
+//
+// phoneAuthProvider = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+////            @Override
+////            public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
+////                Log.d(TAG, "onVerificationCompleted:" + phoneAuthCredential);
+////                mVerificationInProgress = false;
+////
+////                if (mVerificationInProgress && verifyphonenumber()) {
+////                    return;
+////                }
+////            }
+////
+////            @Override
+////            public void onVerificationFailed(FirebaseException e) {
+////                Log.w(TAG, "onVerificationCompleted:" + e);
+////                mVerificationInProgress = false;
+////                // [END_EXCLUDE]
+////
+////                if (e instanceof FirebaseAuthInvalidCredentialsException) {
+////                    // Invalid request
+////                    // [START_EXCLUDE]
+////                    Phone.setError("Invalid phone number.");
+////                    // [END_EXCLUDE]
+////                } else if (e instanceof FirebaseTooManyRequestsException) {
+////                    // The SMS quota for the project has been exceeded
+////                    // [START_EXCLUDE]
+////                    Snackbar.make(findViewById(android.R.id.content), "Quota exceeded.", Snackbar.LENGTH_SHORT).show();
+////                    // [END_EXCLUDE]
+////                }
+////            }
+////
+////            @Override
+////            public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+////                super.onCodeSent(s, forceResendingToken);
+////                Log.d(TAG, "onCodeSent:" + s);
+////                verificationId = s;
+////                resendingToken = forceResendingToken;
+////            }
+////        };
+//    }
+//    private void startPhoneNumberVerification(String toString) {
+//        Log.d(TAG, "verifystart:" + toString);
+//        PhoneAuthProvider.getInstance().verifyPhoneNumber(
+//                toString,        // Phone number to verify
+//                60,                 // Timeout duration
+//                TimeUnit.SECONDS,   // Unit of timeout
+//                this,               // Activity (for callback binding)
+//               phoneAuthProvider);        // OnVerificationStateChangedCallbacks
+//
+//
+//        mVerificationInProgress = true;
+//    }
 
     // method for verify Enrollno
-    private boolean verifyEnrollNo()
-    {
-        String enrollNo=enrollno.getEditText().getText().toString().trim();
-        if(enrollNo.isEmpty())
-        {   enrollno.setErrorEnabled(true);
+    private boolean verifyEnrollNo() {
+        String enrollNo = enrollno.getEditText().getText().toString().trim();
+        if (enrollNo.isEmpty()) {
+            enrollno.setErrorEnabled(true);
             enrollno.setError("Enrollment No. Required");
             return true;
-        }
-        else
-        {
+        } else {
             enrollno.setErrorEnabled(false);
             return false;
         }
     }
-
     // method for verify mailID
-    private boolean verifyEmailId()
-    {
-        String emailId=Email.getEditText().getText().toString().trim();
-        if(emailId.isEmpty())
-        {   Email.setErrorEnabled(true);
+    private boolean verifyEmailId() {
+        String emailId = Email.getEditText().getText().toString().trim();
+        if (emailId.isEmpty()) {
+            Email.setErrorEnabled(true);
             Email.setError(" Email ID Required");
             return true;
         }
@@ -458,64 +473,47 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
 //            Email.setError(" Enter Valid Email ID");
 //            return true;
 //        }
-        else
-        {
+        else {
             Email.setErrorEnabled(false);
             return false;
         }
     }
-
-
     // method for verify Pass
-    private boolean verifyPass()
-    {
-        String pass=Password.getEditText().getText().toString().trim();
-        if(pass.isEmpty())
-        {   Password.setErrorEnabled(true);
+    private boolean verifyPass() {
+        String pass = Password.getEditText().getText().toString().trim();
+        if (pass.isEmpty()) {
+            Password.setErrorEnabled(true);
             Password.setError(" Password Required");
             return true;
-        }
-        else if (!(pass.length()>=6)){
+        } else if (!(pass.length() >= 6)) {
             Password.setErrorEnabled(true);
             Password.setError("Password Length minimun 6 character");
             return true;
-        }
-        else
-        {
+        } else {
             Password.setErrorEnabled(false);
             return false;
         }
     }
-
-
-    // method for verify type
-    private boolean verifyType()
-    {
-        if (type.equals("Select Account Type"))
-        {
+  // method for verify type
+    private boolean verifyType() {
+        if (type.equals("Select Account Type")) {
             Toast.makeText(this, "Please select account type !", Toast.LENGTH_SHORT).show();
             return true;
         }
         return false;
     }
-    private boolean verifyCard1()
-    {
-        db.collection("user").whereEqualTo("card",Integer.parseInt(cardno.getEditText().getText().toString().trim()))
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
+    private boolean verifyCard1() {
+        db.collection("user").whereEqualTo("card", Integer.parseInt(cardno.getEditText().getText().toString().trim())).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful())
-                {
-                    temp=task.getResult().size();
+                if (task.isSuccessful()) {
+                    temp = task.getResult().size();
                 }
             }
         });
-        if(temp==0)
-            return false;
-        else
-            return true;
+        if (temp == 0) return false;
+        else return true;
 
     }
-
-
 }

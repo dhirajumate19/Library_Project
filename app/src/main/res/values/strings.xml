@@ -3,7 +3,7 @@
     <string name="remenber_me">Remenber_me</string>
     <string name="login">login</string>
     <string name="forgotpassword">forgotpassword</string>
-    <string name="welcome">WelCome</string>
+    <string name="welcome">Welcome</string>
     <string name="FullName">FullName</string>
     <string name="E_mail">E_mail</string>
     <string name="Phone_no">Phone_number</string>
@@ -67,6 +67,7 @@
     <string name="email">Email</string>
     <string name="enrollno">Enroll Number</string>
     <string name="cardno">Library card Number</string>
+    <string name="password">PassWord</string>
     <string name="fullname">FullName</string>
     <string name="user_profile">User Profile</string>
     <string name="registration">Registrationadmin</string>
@@ -97,5 +98,12 @@
     <string name="search">searchtitle</string>
     <string name="favorite">fav</string>
     <string name="more">more</string>
+    <string name="login_here">Login Here</string>
+    <string name="user_type">User Type</string>
+    <string name="if_your_already_account">IF Your Already Account!</string>
+    <string name="submit">Submit</string>
+    <string name="logintext">Login</string>
+    <string name="enter_code_here">Enter Code Here</string>
+    <string name="email_not_verify">Email Not Verify!</string>
 
 </resources>

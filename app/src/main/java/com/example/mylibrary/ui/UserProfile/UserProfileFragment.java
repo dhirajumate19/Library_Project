@@ -21,7 +21,6 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -39,8 +38,8 @@ public class UserProfileFragment extends Fragment {
     ImageView uphoto;
     FirebaseFirestore db;
 FirebaseAuth mAuth;
-    TextView everifytxt;
-    Button  resendbutton;
+//    TextView everifytxt;
+//    Button  resendbutton;
 private StorageReference mStorageRef;
     private UserProfileViewModel UserProfilevViewModel;
 
@@ -53,8 +52,8 @@ private StorageReference mStorageRef;
         final EditText uemail = root.findViewById(R.id.uemail);
         final EditText uphone = root.findViewById(R.id.uphone);
         final Button upchangimage = root.findViewById(R.id.UCimage);
-        resendbutton = root.findViewById(R.id.Verifyemail);
-        everifytxt = root.findViewById(R.id.Emailverifytxt);
+//        resendbutton = root.findViewById(R.id.Verifyemail);
+//        everifytxt = root.findViewById(R.id.Emailverifytxt);
 
         // firebase instances
         mAuth= FirebaseAuth.getInstance();
@@ -69,24 +68,24 @@ private StorageReference mStorageRef;
             }
         });
         // Email Verified or not
-        FirebaseUser firebaseUser=mAuth.getCurrentUser();
-        if (!firebaseUser.isEmailVerified()){
-             everifytxt.setVisibility(View.VISIBLE);
-             resendbutton.setVisibility(View.VISIBLE);
-            FirebaseUser fusewr=mAuth.getCurrentUser();
-            fusewr.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void aVoid) {
-                    Toast.makeText(getContext().getApplicationContext(),"Email Verification Link Send to your EMail ",Toast.LENGTH_SHORT).show();
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(getActivity().getApplicationContext()," ",Toast.LENGTH_SHORT).show();
-
-                }
-            });
-        }
+//        FirebaseUser firebaseUser=mAuth.getCurrentUser();
+//        if (!firebaseUser.isEmailVerified()){
+//             everifytxt.setVisibility(View.VISIBLE);
+//             resendbutton.setVisibility(View.VISIBLE);
+//            FirebaseUser fusewr=mAuth.getCurrentUser();
+//            fusewr.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+//                @Override
+//                public void onSuccess(Void aVoid) {
+//                    Toast.makeText(getActivity().getApplicationContext(),"Email Verification Link Send to your EMail ",Toast.LENGTH_SHORT).show();
+//                }
+//            }).addOnFailureListener(new OnFailureListener() {
+//                @Override
+//                public void onFailure(@NonNull Exception e) {
+//                    Toast.makeText(getActivity().getApplicationContext()," ",Toast.LENGTH_SHORT).show();
+//
+//                }
+//            });
+//        }
 
 
 // image code for download image

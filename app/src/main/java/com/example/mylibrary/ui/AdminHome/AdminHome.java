@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.mylibrary.AdminCollectFine;
 import com.example.mylibrary.Admin_Add_Book;
 import com.example.mylibrary.R;
 import com.example.mylibrary.RemoveBook;
@@ -83,8 +84,8 @@ private ImageButton addbooks,updated,removebooks,collectfined,issuedtousers,retu
         if (view==collectfined){
 
 
-//                startActivity(new Intent(getActivity().getApplicationContext(), Collectfine.class));
-//
+               startActivity(new Intent(getActivity().getApplicationContext(), AdminCollectFine.class));
+
 
         }
         if (view==issuedtousers){

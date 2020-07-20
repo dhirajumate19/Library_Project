@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,11 +33,13 @@ public class AdminHome extends AppCompatActivity  {
     FirebaseAuth mAuth;
     private Toolbar toolbar;
    private MenuItem infolog;
+   private  DrawerLayout ad;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_home);
         toolbar = findViewById(R.id.toolbar);
+        ad=findViewById(R.id.drawer_layout);
         mAuth = FirebaseAuth.getInstance();
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -91,10 +94,10 @@ public class AdminHome extends AppCompatActivity  {
 
 
             case R.id.action_Fav: {
-
+                Snackbar.make(ad,"Added To Favorite",Snackbar.LENGTH_SHORT).show();
             }
             case R.id.action_settings: {
-
+                Snackbar.make(ad,"Go to Setting",Snackbar.LENGTH_SHORT).show();
             }
         }
         return (super.onOptionsItemSelected(item));

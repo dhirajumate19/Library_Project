@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/addbookbackground"
+    android:background="@drawable/backgroudaddbook"
     tools:context=".Admin_Add_Book">
 
     <LinearLayout
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:layout_weight="1"
-            android:background="@drawable/edittextbg"
+            android:background="@drawable/editbox"
             android:hint="Book Id"
             android:textColorHint="@color/md_deep_orange_500">
 
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_weight="1"
-            android:background="@drawable/edittextbg"
+            android:background="@drawable/editbox"
             android:hint="Book Title"
             android:textColorHint="@color/md_deep_orange_500">
 
@@ -73,7 +73,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="40sp"
             android:layout_weight="1"
-            android:background="@drawable/addbookbuttonbg"
+            android:background="@drawable/buttonaddbook"
             android:textSize="20dp" />
     </LinearLayout>
 

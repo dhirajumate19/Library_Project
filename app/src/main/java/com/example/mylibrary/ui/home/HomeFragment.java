@@ -55,13 +55,14 @@ public class HomeFragment extends Fragment implements OnCreateOptionMenu {
     ArrayList<String> list1;
     Query query;
     private String key = "";
-
+private CoordinatorLayout as;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         HomeViewModel homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         final TextView textView = root.findViewById(R.id.text_home);
         searchbook = root.findViewById(R.id.serachview);
+        as=root.findViewById(R.id.layout);
         progressBar = root.findViewById(R.id.progress_bar);
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -147,6 +148,9 @@ public class HomeFragment extends Fragment implements OnCreateOptionMenu {
             case R.id.search_action:
                 Toast.makeText(getContext().getApplicationContext(), "You have selected Search Menu", Toast.LENGTH_SHORT).show();
                 return true;
+            case R.id.favorite:{
+
+            }
             default:
                 throw new IllegalStateException("Unexpected value: " + item.getItemId());
         }

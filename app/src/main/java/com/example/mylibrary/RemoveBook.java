@@ -60,14 +60,11 @@ public class RemoveBook extends AppCompatActivity implements View.OnClickListene
                 removebookid.setErrorEnabled(true);
                 return;
             }
-//        Toast.makeText(RemoveBook.this,"done",Toast.LENGTH_SHORT).show();
             String id1 = removebookid.getEditText().getText().toString().trim();
             db.document("Book/"+id1).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     if (task.isSuccessful()) {
-//                        DocumentSnapshot documentSnapshot1=task.getResult();
-//                        Long id = (Long)documentSnapshot1.get("bookid");
                         Log.i("task","task work"+task);
 
                         if (task.getResult().exists()) {
@@ -120,7 +117,7 @@ public class RemoveBook extends AppCompatActivity implements View.OnClickListene
                         }
                     }else {
                         progressDialog.cancel();
-                        Toast.makeText(RemoveBook.this, "Oops Please  Try Again !!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RemoveBook.this, "Oops Please  Something went wrong Try Again !!", Toast.LENGTH_SHORT).show();
 
                     }
                 }
